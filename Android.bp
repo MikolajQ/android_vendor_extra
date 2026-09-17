@@ -1,13 +1,5 @@
 // vendor/extra — rhode (MikolajQ). Moduły dodawane w product.mk.
 
-// /system/etc/hosts z obrazu (bloker: adult + social + komunikatory). Zastępuje AOSP-owy etc_hosts z system/core.
-prebuilt_etc {
-    name: "hosts_rhode",
-    src: "hosts",
-    filename: "hosts",
-    overrides: ["etc_hosts"],
-}
-
 // Repozytoria F-Droid: JSON dla klienta od 03.2026, XML dla starszego prebuiltu.
 prebuilt_etc {
     name: "fdroid_additional_repos_json",

@@ -1,4 +1,0 @@
-# Placeholder. Właściwy plik generuje rhode-los23.2/scripts/fetch-hosts.sh przed buildem
-# (StevenBlack porn-only + social-only + komunikatory, bez WhatsApp i Signal).
-127.0.0.1 localhost
-::1 ip6-localhost

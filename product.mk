@@ -24,8 +24,8 @@ ifneq (,$(wildcard external/chromium-webview/Android.bp))
 PRODUCT_PACKAGES += CromiteWebView
 endif
 
-# Bloker, warstwa 2: /system/etc/hosts (plik generuje scripts/fetch-hosts.sh; warstwa 1 = Private DNS w overlay-lineage)
-PRODUCT_PACKAGES += hosts_rhode
+# Bloker, warstwa 2: /system/etc/hosts — scripts/fetch-hosts.sh nadpisuje system/core/rootdir/etc/hosts (moduł etc_hosts AOSP);
+# własny moduł z overrides nie działa: soong generuje regułę instalacji dla obu i kati pada na duplikacie.
 
 # KernelSU-Next: manager
 PRODUCT_PACKAGES += KernelSUNext
