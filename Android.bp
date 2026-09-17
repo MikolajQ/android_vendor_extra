@@ -9,12 +9,6 @@ prebuilt_etc {
     product_specific: true,
 }
 
-prebuilt_etc {
-    name: "fdroid_additional_repos_xml",
-    src: "fdroid/additional_repos.xml",
-    filename: "additional_repos.xml",
-    sub_dir: "org.fdroid.fdroid",
-}
 
 // Manager KernelSU-Next v3.3.0 (oryginalny; na telefonie dziecka ukryty / za PIN-em).
 android_app_import {

@@ -6,7 +6,7 @@ Fork `Tomoms/android_vendor_extra` @16.2. Dociągany przez `inherit-product-if-e
 | Co | Jak |
 |---|---|
 | OTA | `lineage.updater.uri` → `MikolajQ/rhode_releases/main/23.x/{device}.json` |
-| F-Droid | `F-Droid` (prebuilt Tomoms) + repozytoria IzzyOnDroid, NewPipe, IronFox: `fdroid/additional_repos.json` (klient od 03.2026, `/product/etc/fdroid/`) i `.xml` (starszy, `/system/etc/org.fdroid.fdroid/`); certyfikaty wyciągnięte z `index-v1.jar` każdego repo |
+| F-Droid | `F-Droid` (prebuilt Tomoms) + repozytoria IzzyOnDroid, NewPipe, IronFox: `fdroid/additional_repos.json` jako moduł (`/product/etc/fdroid/`, klient od 03.2026) oraz `fdroid/additional_repos.xml`, którym przepis nadpisuje `vendor/lineage/prebuilt/common/etc/additional_fdroid_repos.xml` Tomoms (on kopiuje go do `/system/etc/org.fdroid.fdroid/`); certyfikaty z `index-v1.jar` każdego repo |
 | WebView | `CromiteWebView` (moduł z `external/chromium-webview`, tworzony przez `scripts/fetch-webview.sh`) + overlay `config_webview_packages.xml` z `org.cromite.webview` |
 | Bloker, warstwa 2 | `/system/etc/hosts` = moduł AOSP `etc_hosts`; jego plik źródłowy `system/core/rootdir/etc/hosts` nadpisuje `scripts/fetch-hosts.sh` przed `mka` (własny moduł z `overrides` dawał duplikat reguły instalacji w kati) |
 | Bloker, warstwa 1 | `overlay-lineage/…/SimpleSettingsConfig`: przy pierwszym boocie `private_dns_mode=hostname`, `private_dns_specifier=family.adguard-dns.com` |

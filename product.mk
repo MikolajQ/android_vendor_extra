@@ -10,8 +10,10 @@ endif
 ifneq (,$(wildcard external/F-Droid))
 PRODUCT_PACKAGES += \
     F-Droid \
-    fdroid_additional_repos_json \
-    fdroid_additional_repos_xml
+    fdroid_additional_repos_json
+# XML (stary klient): Tomoms kopiuje vendor/lineage/prebuilt/common/etc/additional_fdroid_repos.xml do
+# /system/etc/org.fdroid.fdroid/additional_repos.xml (vendor/lineage/config/common.mk) — przepis nadpisuje ten plik
+# naszym fdroid/additional_repos.xml; własny moduł kolidował z tą regułą.
 endif
 
 # F-Droid Privileged Extension
