@@ -12,6 +12,7 @@ Fork `Tomoms/android_vendor_extra` @16.2. Dociągany przez `inherit-product-if-e
 | Bloker, warstwa 1 | `overlay-lineage/…/SimpleSettingsConfig`: przy pierwszym boocie `private_dns_mode=hostname`, `private_dns_specifier=family.adguard-dns.com` |
 | KernelSU-Next | `KernelSUNext` — oryginalny manager v3.3.0 (`prebuilt/KernelSUNext.apk`, sha256 `fd0b1238…`) |
 | GApps | `WITH_GMS=true`: MindTheGapps + `vendor/gapps-extras/extras.mk` (GmsSupervision, Gearhead — generowane z zipa) |
+| Allowlista Android.mk | `build/androidmk/allowlist.txt` — soong (A16) blokuje `Android.mk` pod `packages/`; fork `build_soong` Tomoms czyta tę listę, F-Droid Privileged Extension buduje się z `Android.mk` |
 | Wycięte | Bellis, LogViewer |
 
 Aktualizacja z upstreamu: `git fetch https://github.com/Tomoms/android_vendor_extra 16.2 && git merge FETCH_HEAD`.
