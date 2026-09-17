@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Jedyny WebView w obrazie: Cromite SystemWebView (external/chromium-webview, moduł CromiteWebView). -->
+<webviewproviders>
+    <webviewprovider description="Cromite WebView" packageName="org.cromite.webview" availableByDefault="true">
+    </webviewprovider>
+</webviewproviders>

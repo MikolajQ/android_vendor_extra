@@ -1,0 +1,37 @@
+// vendor/extra — rhode (MikolajQ). Moduły dodawane w product.mk.
+
+// /system/etc/hosts z obrazu (bloker: adult + social + komunikatory). Zastępuje AOSP-owy etc_hosts z system/core.
+prebuilt_etc {
+    name: "hosts_rhode",
+    src: "hosts",
+    filename: "hosts",
+    overrides: ["etc_hosts"],
+}
+
+// Repozytoria F-Droid: JSON dla klienta od 03.2026, XML dla starszego prebuiltu.
+prebuilt_etc {
+    name: "fdroid_additional_repos_json",
+    src: "fdroid/additional_repos.json",
+    filename: "additional_repos.json",
+    sub_dir: "fdroid",
+    product_specific: true,
+}
+
+prebuilt_etc {
+    name: "fdroid_additional_repos_xml",
+    src: "fdroid/additional_repos.xml",
+    filename: "additional_repos.xml",
+    sub_dir: "org.fdroid.fdroid",
+}
+
+// Manager KernelSU-Next v3.3.0 (oryginalny; na telefonie dziecka ukryty / za PIN-em).
+android_app_import {
+    name: "KernelSUNext",
+    apk: "prebuilt/KernelSUNext.apk",
+    presigned: true,
+    preprocessed: true,
+    dex_preopt: {
+        enabled: false,
+    },
+    product_specific: true,
+}

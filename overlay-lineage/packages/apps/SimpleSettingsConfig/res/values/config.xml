@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Ustawienia aplikowane raz, przy pierwszym boocie po flashu/wipe. -->
     <string-array name="configs_first_boot_base">
         <item>global/adb_allowed_connection_time=0</item>
+        <!-- Bloker, warstwa 1: AdGuard DNS Family (reklamy, adult, wymuszony SafeSearch i tryb bezpieczny YouTube) -->
+        <item>global/private_dns_mode=hostname</item>
+        <item>global/private_dns_specifier=family.adguard-dns.com</item>
     </string-array>
 </resources>

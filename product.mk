@@ -6,14 +6,12 @@ PRODUCT_ADB_KEYS := $(EXTRA_PATH)/adbkey.pub
 PRODUCT_COPY_FILES += $(PRODUCT_ADB_KEYS):$(TARGET_COPY_OUT_RECOVERY)/root/$(TARGET_COPY_OUT_PRODUCT)/etc/security/adb_keys
 endif
 
-# Bellis
-ifneq (,$(wildcard packages/apps/Bellis))
-PRODUCT_PACKAGES += Bellis
-endif
-
-# F-Droid
+# F-Droid + repozytoria (IzzyOnDroid, NewPipe, IronFox — same adresy, bez APK w obrazie)
 ifneq (,$(wildcard external/F-Droid))
-PRODUCT_PACKAGES += F-Droid
+PRODUCT_PACKAGES += \
+    F-Droid \
+    fdroid_additional_repos_json \
+    fdroid_additional_repos_xml
 endif
 
 # F-Droid Privileged Extension
@@ -21,23 +19,49 @@ ifneq (,$(wildcard packages/apps/F-DroidPrivilegedExtension))
 PRODUCT_PACKAGES += F-DroidPrivilegedExtension
 endif
 
-# LogViewer
-ifneq (,$(wildcard packages/apps/LogViewer))
-PRODUCT_PACKAGES += LogViewer
+# WebView: Cromite (external/chromium-webview z scripts/fetch-webview.sh) + rejestracja w config_webview_packages
+ifneq (,$(wildcard external/chromium-webview/Android.bp))
+PRODUCT_PACKAGES += CromiteWebView
 endif
 
-# Custom OTA endpoint
+# Bloker, warstwa 2: /system/etc/hosts (plik generuje scripts/fetch-hosts.sh; warstwa 1 = Private DNS w overlay-lineage)
+PRODUCT_PACKAGES += hosts_rhode
+
+# KernelSU-Next: manager
+PRODUCT_PACKAGES += KernelSUNext
+
+# OTA: własne release'y
 PRODUCT_SYSTEM_EXT_PROPERTIES += \
-    lineage.updater.uri=https://raw.githubusercontent.com/Tomoms/ota_provider/master/23.x/{device}.json
+    lineage.updater.uri=https://raw.githubusercontent.com/MikolajQ/rhode_releases/main/23.x/{device}.json
 
 # Default ADB shell prompt
 PRODUCT_SYSTEM_EXT_PROPERTIES += \
     persist.sys.adb.shell=/system_ext/bin/bash
 
-# Google Apps
+# Google Apps: MindTheGapps (przycięte patchem) + dodatki z zipa (GmsSupervision, Gearhead) w vendor/gapps-extras
 ifeq ($(WITH_GMS), true)
 $(call inherit-product-if-exists, vendor/gapps/arm64/arm64-vendor.mk)
+# (APK nie może iść przez PRODUCT_COPY_FILES — build to odrzuca; scripts/gapps-extras.sh generuje Android.bp + extras.mk)
+$(call inherit-product-if-exists, vendor/gapps-extras/extras.mk)
 endif
 
+# PIF values
+PRODUCT_PRODUCT_PROPERTIES += \
+    persist.sys.pihooks_MANUFACTURER?=Google \
+    persist.sys.pihooks_BRAND?=google \
+    persist.sys.pihooks_PRODUCT?=blazer_beta \
+    persist.sys.pihooks_DEVICE?=blazer \
+    persist.sys.pihooks_ID?=CP21.260306.017 \
+    persist.sys.pihooks_RELEASE?=17 \
+    persist.sys.pihooks_SECURITY_PATCH?=2026-03-05 \
+    persist.sys.pihooks_DEVICE_INITIAL_SDK_INT?=21 \
+    persist.sys.pihooks_SDK_INT?=32
+
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    PihooksGmsFp="google/blazer_beta/blazer:17/CP21.260306.017/15063635:user/release-keys" \
+    PihooksGmsModel="Pixel 10 Pro"
+
 # Overlays
-PRODUCT_PACKAGE_OVERLAYS += $(EXTRA_PATH)/overlay-lineage
+PRODUCT_PACKAGE_OVERLAYS += \
+    $(EXTRA_PATH)/overlay \
+    $(EXTRA_PATH)/overlay-lineage
