@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Jedyny WebView w obrazie: Cromite SystemWebView (external/chromium-webview, moduł CromiteWebView). -->
+<!-- Jedyny WebView w obrazie: Cromite SystemWebView (external/chromium-webview, moduł CromiteWebView).
+     UWAGA: Cromite arm64_SystemWebView.apk ma nazwę pakietu com.android.webview (nie org.cromite.webview).
+     Zła nazwa = brak dostawcy "available by default" = system_server pada przy starcie (bootloop). -->
 <webviewproviders>
-    <webviewprovider description="Cromite WebView" packageName="org.cromite.webview" availableByDefault="true">
+    <webviewprovider description="Cromite WebView" packageName="com.android.webview" availableByDefault="true">
     </webviewprovider>
 </webviewproviders>
