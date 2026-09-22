@@ -6,19 +6,14 @@ PRODUCT_ADB_KEYS := $(EXTRA_PATH)/adbkey.pub
 PRODUCT_COPY_FILES += $(PRODUCT_ADB_KEYS):$(TARGET_COPY_OUT_RECOVERY)/root/$(TARGET_COPY_OUT_PRODUCT)/etc/security/adb_keys
 endif
 
-# F-Droid + repozytoria (IzzyOnDroid, NewPipe, IronFox — same adresy, bez APK w obrazie)
-ifneq (,$(wildcard external/F-Droid))
-PRODUCT_PACKAGES += \
-    F-Droid \
-    fdroid_additional_repos_json
-# XML (stary klient): Tomoms kopiuje vendor/lineage/prebuilt/common/etc/additional_fdroid_repos.xml do
-# /system/etc/org.fdroid.fdroid/additional_repos.xml (vendor/lineage/config/common.mk) — przepis nadpisuje ten plik
-# naszym fdroid/additional_repos.xml; własny moduł kolidował z tą regułą.
-endif
-
-# F-Droid Privileged Extension
-ifneq (,$(wildcard packages/apps/F-DroidPrivilegedExtension))
-PRODUCT_PACKAGES += F-DroidPrivilegedExtension
+# Droid-ify zamiast F-Droida (decyzja 21.09: F-Droid ciężki i toporny; Droid-ify nie ma Privileged Extension
+# ani INSTALL_PACKAGES — cicha instalacja tylko przez root KSU-Next). Repozytoria IzzyOnDroid/NewPipe/IronFox
+# nadal przez XML: Tomoms kopiuje vendor/lineage/prebuilt/common/etc/additional_fdroid_repos.xml do
+# /system/etc/org.fdroid.fdroid/additional_repos.xml (vendor/lineage/config/common.mk) — przepis nadpisuje ten
+# plik naszym fdroid/additional_repos.xml; Droid-ify (OemRepositoryParser) czyta dokładnie tę samą ścieżkę
+# i ten sam format, więc zero zmian w samym pliku repozytoriów.
+ifneq (,$(wildcard external/droidify/Android.bp))
+PRODUCT_PACKAGES += Droidify
 endif
 
 # WebView: prebuilt oficjalny LineageOS (moduł "webview" z external/chromium-webview, sync bez remove-project

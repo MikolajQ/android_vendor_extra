@@ -1,1 +1,2 @@
-packages/apps/F-DroidPrivilegedExtension/app/src/main/Android.mk
+# Soong (Android 16) blokuje Android.mk pod packages/ bez wpisu tutaj.
+# Obecnie pusta: F-DroidPrivilegedExtension (jedyny wpis) usunięty razem z F-Droidem 22.09 (Droid-ify).

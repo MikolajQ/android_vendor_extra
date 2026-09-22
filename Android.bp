@@ -1,15 +1,5 @@
 // vendor/extra — rhode (MikolajQ). Moduły dodawane w product.mk.
 
-// Repozytoria F-Droid: JSON dla klienta od 03.2026, XML dla starszego prebuiltu.
-prebuilt_etc {
-    name: "fdroid_additional_repos_json",
-    src: "fdroid/additional_repos.json",
-    filename: "additional_repos.json",
-    sub_dir: "fdroid",
-    product_specific: true,
-}
-
-
 // Manager KernelSU-Next v3.3.0 (oryginalny; na telefonie dziecka ukryty / za PIN-em).
 android_app_import {
     name: "KernelSUNext",
