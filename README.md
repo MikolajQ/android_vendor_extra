@@ -11,6 +11,7 @@ Fork `Tomoms/android_vendor_extra` @16.2. Dociągany przez `inherit-product-if-e
 | Bloker, warstwa 2 | `/system/etc/hosts` = moduł AOSP `etc_hosts`; jego plik źródłowy `system/core/rootdir/etc/hosts` nadpisuje `scripts/fetch-hosts.sh` przed `mka` (własny moduł z `overrides` dawał duplikat reguły instalacji w kati) |
 | Bloker, warstwa 1 | `overlay-lineage/…/SimpleSettingsConfig`: przy pierwszym boocie `private_dns_mode=hostname`, `private_dns_specifier=family.adguard-dns.com` |
 | KernelSU-Next | `KernelSUNext` — oryginalny manager v3.3.0 (`prebuilt/KernelSUNext.apk`, sha256 `fd0b1238…`) |
+| Play Integrity (PIF) | `persist.sys.pihooks_*` — profil Pixel 10 Pro `blazer` (NIE `blazer_beta`; beta nie przechodzi już DEVICE integrity), build `BD3A.251105.010.E1`, z realnego dumpu firmware; `persist.*` da się podmienić na żywo bez rebuilda, jeśli ten profil też padnie |
 | GApps | `WITH_GMS=true`: MindTheGapps + `vendor/gapps-extras/extras.mk` (GmsSupervision, Gearhead — generowane z zipa) |
 | Allowlista Android.mk | `build/androidmk/allowlist.txt` — soong (A16) blokuje `Android.mk` pod `packages/`; fork `build_soong` Tomoms czyta tę listę. Pusta od 22.09 (jedyny wpis, F-Droid Privileged Extension, usunięty z Droid-ify) |
 | Wycięte | Bellis, LogViewer |

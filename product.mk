@@ -49,20 +49,31 @@ $(call inherit-product-if-exists, vendor/gapps/arm64/arm64-vendor.mk)
 $(call inherit-product-if-exists, vendor/gapps-extras/extras.mk)
 endif
 
-# PIF values
+# PIF values (PropImitationHooks — LineageOS native, persist.sys.pihooks_*, czytane przez GMS unstable).
+# Odświeżone 22.09: poprzedni profil był BETA (blazer_beta, CP21.260306.017 z marca) — od pewnego czasu
+# beta fingerprinty NIE przechodzą już nawet DEVICE integrity, tylko STRONG (a to wymaga TrickyStore +
+# prawdziwego keyboxa sprzętowego, którego nie mamy) — patrz github.com/daboynb/autojson README, cytuje
+# github.com/osm0sis/PlayIntegrityFork. To była też przyczyna "Urządzenie nie ma certyfikatu" w Play (21.09).
+# Nowy profil: prawdziwy, NIE-beta build Pixela 10 Pro (blazer, nie blazer_beta) z legalnego dumpu firmware
+# (github.com/gm-stuffs/google_blazer_dump, gałąź blazer-user-16-BD3A.251105.010.E1-...-release-keys,
+# fingerprint zweryfikowany z vendor/build.prop tego dumpu). RELEASE/SDK_INT spójne (Android 16 / API 36) —
+# poprzedni profil miał RELEASE=17 razem z SDK_INT=32, co się wzajemnie wyklucza.
+# Odświeżanie na przyszłość: to persist.*, więc da się to podmienić na żywo (resetprop) bez rebuilda, jeśli
+# ten profil też trafi na czarną listę Google — szukać najnowszego NIE-beta dumpu "blazer" albo następcy
+# Pixela 10 na github (branże/repo "*_dump", filtrować po "-release-keys", odrzucać "_beta"/"canary").
 PRODUCT_PRODUCT_PROPERTIES += \
     persist.sys.pihooks_MANUFACTURER?=Google \
     persist.sys.pihooks_BRAND?=google \
-    persist.sys.pihooks_PRODUCT?=blazer_beta \
+    persist.sys.pihooks_PRODUCT?=blazer \
     persist.sys.pihooks_DEVICE?=blazer \
-    persist.sys.pihooks_ID?=CP21.260306.017 \
-    persist.sys.pihooks_RELEASE?=17 \
-    persist.sys.pihooks_SECURITY_PATCH?=2026-03-05 \
-    persist.sys.pihooks_DEVICE_INITIAL_SDK_INT?=21 \
-    persist.sys.pihooks_SDK_INT?=32
+    persist.sys.pihooks_ID?=BD3A.251105.010.E1 \
+    persist.sys.pihooks_RELEASE?=16 \
+    persist.sys.pihooks_SECURITY_PATCH?=2025-11-05 \
+    persist.sys.pihooks_DEVICE_INITIAL_SDK_INT?=36 \
+    persist.sys.pihooks_SDK_INT?=36
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PihooksGmsFp="google/blazer_beta/blazer:17/CP21.260306.017/15063635:user/release-keys" \
+    PihooksGmsFp="google/blazer/blazer:16/BD3A.251105.010.E1/14337626:user/release-keys" \
     PihooksGmsModel="Pixel 10 Pro"
 
 # Overlays
