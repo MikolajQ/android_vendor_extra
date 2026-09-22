@@ -21,9 +21,12 @@ ifneq (,$(wildcard packages/apps/F-DroidPrivilegedExtension))
 PRODUCT_PACKAGES += F-DroidPrivilegedExtension
 endif
 
-# WebView: Cromite (external/chromium-webview z scripts/fetch-webview.sh) + rejestracja w config_webview_packages
+# WebView: prebuilt oficjalny LineageOS (moduł "webview" z external/chromium-webview, sync bez remove-project
+# w rhode.xml) zamiast Cromite (22.09: patch Cromite wymuszający partycjonowanie połączeń wywala SIGTRAP-em
+# kazda apke wolajaca WebView preconnect z pustym NetworkAnonymizationKey - github.com/uazo/cromite/issues/3085).
+# Nazwa pakietu APK (com.android.webview) taka sama jak wczesniej - nakladka config_webview_packages bez zmian.
 ifneq (,$(wildcard external/chromium-webview/Android.bp))
-PRODUCT_PACKAGES += CromiteWebView
+PRODUCT_PACKAGES += webview
 endif
 
 # Bloker, warstwa 2: /system/etc/hosts — scripts/fetch-hosts.sh nadpisuje system/core/rootdir/etc/hosts (moduł etc_hosts AOSP);

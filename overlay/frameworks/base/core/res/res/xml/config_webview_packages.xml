@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Jedyny WebView w obrazie: Cromite SystemWebView (external/chromium-webview, moduł CromiteWebView).
-     UWAGA: Cromite arm64_SystemWebView.apk ma nazwę pakietu com.android.webview (nie org.cromite.webview).
-     Zła nazwa = brak dostawcy "available by default" = system_server pada przy starcie (bootloop). -->
+<!-- Jedyny WebView w obrazie: prebuilt oficjalny LineageOS (external/chromium-webview, moduł "webview";
+     do 22.09 był tu Cromite - zamieniony po github.com/uazo/cromite/issues/3085, SIGTRAP z Google Ads SDK).
+     Pakiet nadal com.android.webview - ta sama nazwa co Cromite, więc ta nakładka nie musiała się zmienić
+     poza opisem. UWAGA na przyszłość: zła nazwa pakietu tu = brak dostawcy "available by default" =
+     system_server pada przy starcie (bootloop, zdarzyło się 19.09 z org.cromite.webview). -->
 <webviewproviders>
-    <webviewprovider description="Cromite WebView" packageName="com.android.webview" availableByDefault="true">
+    <webviewprovider description="Android System WebView" packageName="com.android.webview" availableByDefault="true">
     </webviewprovider>
 </webviewproviders>
