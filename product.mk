@@ -49,6 +49,11 @@ $(call inherit-product-if-exists, vendor/gapps/arm64/arm64-vendor.mk)
 $(call inherit-product-if-exists, vendor/gapps-extras/extras.mk)
 endif
 
+# Moto Camera stockowa (MotCamera4 + MotCamera3AI + MotoSignature) — przetestowana 21.09 na telefonie
+# (moduł KSU-Next), decyzja 22.09: do obrazu. GCam MGC 8.6 zostaje aplikacją z ręki, nie wchodzi tu.
+# scripts/motocam-extras.sh generuje Android.bp + extras.mk z zipa (argument HAM motocam_zip).
+$(call inherit-product-if-exists, vendor/motocam-extras/extras.mk)
+
 # PIF values (PropImitationHooks — LineageOS native, persist.sys.pihooks_*, czytane przez GMS unstable).
 # Odświeżone 22.09: poprzedni profil był BETA (blazer_beta, CP21.260306.017 z marca) — od pewnego czasu
 # beta fingerprinty NIE przechodzą już nawet DEVICE integrity, tylko STRONG (a to wymaga TrickyStore +
