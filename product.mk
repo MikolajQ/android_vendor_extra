@@ -8,13 +8,13 @@ endif
 
 # Droid-ify zamiast F-Droida (decyzja 21.09: F-Droid ciężki i toporny; Droid-ify nie ma Privileged Extension
 # ani INSTALL_PACKAGES — cicha instalacja tylko przez root KSU-Next). Repozytoria IzzyOnDroid/NewPipe/IronFox
-# nadal przez XML: Tomoms kopiuje vendor/lineage/prebuilt/common/etc/additional_fdroid_repos.xml do
-# /system/etc/org.fdroid.fdroid/additional_repos.xml (vendor/lineage/config/common.mk) — przepis nadpisuje ten
-# plik naszym fdroid/additional_repos.xml; Droid-ify (OemRepositoryParser) czyta dokładnie tę samą ścieżkę
-# i ten sam format, więc zero zmian w samym pliku repozytoriów.
+# przez XML w /system/etc/org.fdroid.fdroid/additional_repos.xml — Droid-ify (OemRepositoryParser) czyta tę
+# ścieżkę. LineageOS tego pliku nie instaluje (robił to vendor/lineage Tomoms do 0.1.x przepisu), więc tu.
 ifneq (,$(wildcard external/droidify/Android.bp))
 PRODUCT_PACKAGES += Droidify
 endif
+PRODUCT_COPY_FILES += \
+    $(EXTRA_PATH)/fdroid/additional_repos.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/org.fdroid.fdroid/additional_repos.xml
 
 # WebView: prebuilt oficjalny LineageOS (moduł "webview" z external/chromium-webview, sync bez remove-project
 # w rhode.xml) zamiast Cromite (22.09: patch Cromite wymuszający partycjonowanie połączeń wywala SIGTRAP-em
@@ -54,7 +54,8 @@ endif
 # scripts/motocam-extras.sh generuje Android.bp + extras.mk z zipa (argument HAM motocam_zip).
 $(call inherit-product-if-exists, vendor/motocam-extras/extras.mk)
 
-# PIF values (PropImitationHooks — LineageOS native, persist.sys.pihooks_*, czytane przez GMS unstable).
+# PIF values (PropImitationHooks — NIE ma ich w LineageOS; kod z forków Tomoms, w przepisie jako patche
+# patches/{frameworks_base,bionic,build_soong,system_core}; persist.sys.pihooks_*, czytane przez GMS unstable).
 # Odświeżone 22.09: poprzedni profil był BETA (blazer_beta, CP21.260306.017 z marca) — od pewnego czasu
 # beta fingerprinty NIE przechodzą już nawet DEVICE integrity, tylko STRONG (a to wymaga TrickyStore +
 # prawdziwego keyboxa sprzętowego, którego nie mamy) — patrz github.com/daboynb/autojson README, cytuje
